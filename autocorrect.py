@@ -8,13 +8,33 @@ from collections import Counter
 import codecs
 import unidecode
 
-#Cria todos os métodos para a utilização
-
 #
 def words(text): return re.findall(r'\w+', text.lower())
 
 #
 def normalize(text): return unidecode.unidecode(text)
+
+#Aprende com o texto de entrada
+
+#Diretório
+file_path = ''
+
+#Arquivo
+file = file_path + 'fernando-pessoa.txt'
+
+#Abre o texto e carrega em memória
+text_raw = codecs.open(file, 'r', 'iso-8859-1').read()
+
+#Normaliza texto
+text_normalized = normalize(text_raw)
+
+#Separa texto em lista de palavras
+words_in_text = words(text_normalized)
+
+#Agrupa as palavras
+WORDS = Counter(words_in_text)
+
+#Cria todos os métodos para a utilização
 
 #
 def P(word, N=sum(WORDS.values())): 
@@ -64,26 +84,6 @@ def corrections(phrase):
   for word in normalized_text.split(' '):
     final_text = final_text + ' ' + correction(word)
   return final_text
-
-#Aprende com o texto de entrada
-
-#Diretório
-file_path = ''
-
-#Arquivo
-file = file_path + 'fernando-pessoa.txt'
-
-#Abre o texto e carrega em memória
-text_raw = codecs.open(file, 'r', 'iso-8859-1').read()
-
-#Normaliza texto
-text_normalized = normalize(text_raw)
-
-#Separa texto em lista de palavras
-words_in_text = words(text_normalized)
-
-#Agrupa as palavras
-WORDS = Counter(words_in_text)
 
 #############################################################################################
 #Teste
